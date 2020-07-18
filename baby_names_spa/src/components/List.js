@@ -19,29 +19,29 @@ export default class List extends React.Component{
     }
   }
 
-  useEffect(()=> {
-      if (!list.length){
-      // 1. ask to create a list 
-      fetch(`${API_ROOT}/list`, {
-        method: "POST",
-        headers: HEADERS,
-        body: JSON.stringify({message: "Dear backend, would you please create a list for me"})
-      })
-        .then(resp => resp.json())
-        .then(json => setList(json.list))
-      }
-      else if (search === "") {
-        // 2. if list exist change the url
-        history.push(`/?list_id=${list}`)
-      }
-      else if(names.length === 0){
-        // 3. and finally, get the initial names
-        fetch(`${API_ROOT}/names/${list}`)
-          .then(resp => resp.json())
-          .then(json => setNames(json.names))
-      }
+  // useEffect(()=> {
+  //     if (!list.length){
+  //     // 1. ask to create a list 
+  //     fetch(`${API_ROOT}/list`, {
+  //       method: "POST",
+  //       headers: HEADERS,
+  //       body: JSON.stringify({message: "Dear backend, would you please create a list for me"})
+  //     })
+  //       .then(resp => resp.json())
+  //       .then(json => setList(json.list))
+  //     }
+  //     else if (search === "") {
+  //       // 2. if list exist change the url
+  //       history.push(`/?list_id=${list}`)
+  //     }
+  //     else if(names.length === 0){
+  //       // 3. and finally, get the initial names
+  //       fetch(`${API_ROOT}/names/${list}`)
+  //         .then(resp => resp.json())
+  //         .then(json => setNames(json.names))
+  //     }
       
-    }, [list, search, names, history])
+  //   }, [list, search, names, history])
 
   const handleReceived = name => setNames([...names.filter(n => n.id !== name.id), name])
   
